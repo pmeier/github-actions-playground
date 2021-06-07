@@ -1,19 +1,14 @@
 name: pr-labels
 
 on:
-  pull_request:
-    types:
-      - opened
-      - labeled
-      - unlabeled
+  push:
 
 jobs:
   is-labeled:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Echo labels
-        run: echo ${{ github.event.pull_request.labels }}
+      - name: Print the GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
