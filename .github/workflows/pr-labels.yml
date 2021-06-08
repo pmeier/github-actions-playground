@@ -1,14 +1,21 @@
-name: pr-labels
-
 on:
   push:
+    branches:
+      - master
 
 jobs:
-  is-labeled:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Print the GitHub context
+      - uses: mshick/add-pr-comment@v1
         env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            **Hello MASTER**
+            multiline
+
+            whatever
+
+            ping @pmeier
+          allow-repeats: true
