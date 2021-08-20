@@ -23,10 +23,10 @@ jobs:
 #      - name: Upgrade or install additional system packages
 #        run: pip install --upgrade pip setuptools virtualenv wheel
 #
-#      - name: Checkout repository
-#        uses: actions/checkout@v2
-#        with:
-#          fetch-depth: 0
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 #
 #      - name: Install dev requirements
 #        run: pip install -r requirements-dev.txt
