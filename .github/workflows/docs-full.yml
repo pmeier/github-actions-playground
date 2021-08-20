@@ -37,8 +37,15 @@ jobs:
 #      - name: Build docs
 #        run: tox -e docs-html
 #
-#      - name: Upload galleries
+      - name: Zip galleries
 #        working-directory: docs/source
-#        run: |
-#          zip main.zip galleries
-#          # TODO
+        run: zip -r main.zip .github
+
+      - name: Upload galleries
+        uses: appleboy/scp-action@v0.1.1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: main.zip
+          target: /tmp
