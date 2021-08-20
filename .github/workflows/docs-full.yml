@@ -39,7 +39,9 @@ jobs:
 #
       - name: Zip galleries
 #        working-directory: docs/source
-        run: zip -r main.zip .github
+        run: |
+          git rev-parse HEAD > commit
+          zip -r main.zip .github commit
 
       - name: Upload galleries
         uses: appleboy/scp-action@v0.1.1
