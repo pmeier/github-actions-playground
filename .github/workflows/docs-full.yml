@@ -50,4 +50,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           source: main.zip
-          target: ${{ secrects.TARGET }}/galleries
+          target: ${{ secrets.TARGET }}/galleries
