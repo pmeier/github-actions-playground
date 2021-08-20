@@ -46,8 +46,8 @@ jobs:
       - name: Upload galleries
         uses: appleboy/scp-action@v0.1.1
         with:
-          host: ${{ secrets.HOST }}
+          host: pystiche.org
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           source: main.zip
-          target: /tmp
+          target: ${{ TARGET }}/galleries
