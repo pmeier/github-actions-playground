@@ -47,6 +47,4 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
-#    steps: ${{ fromJson(needs.generate-steps.outputs.steps) }}
-    steps:
-      - run: exit 0
+    steps: ${{ fromJson(needs.generate-steps.outputs.steps) }}
