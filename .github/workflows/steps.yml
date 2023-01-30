@@ -17,7 +17,7 @@ jobs:
       - id: generate
         run: |
           MATRIX=$(python .github/generate_matrix.py)
-          echo $MATRIX | jq
+          echo $MATRIX
           echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
 
   generate-steps:
