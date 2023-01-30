@@ -45,3 +45,37 @@ jobs:
           print(platform.platform())
           print(sys.executable)
           print(sys.version_info)
+
+  generate-matrix:
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.generate.outputs.matrix }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+        id: generate
+        run: |
+          MATRIX=$(python .github/generate_matrix.py)
+          echo $MATRIX | jq
+          echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
+
+  dynamic:
+    needs: build-matrix
+
+    strategy:
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
+      fail-fast: false
+
+    steps:
+      - name: Showcase Python shell
+        shell: python
+        run: |
+          import platform
+          import sys
+
+          print(platform.platform())
+          print(sys.executable)
+          print(sys.version_info)
