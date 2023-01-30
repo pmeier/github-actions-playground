@@ -30,5 +30,11 @@ jobs:
           print(sys.executable)
           print(sys.version_info)
 
-      - name: Try pip
-        run: python -m pip install requests
+      - name: Showcase pip
+        run: python -m pip install numpy
+
+      - name: Try numpy
+        run: |
+          import numpy
+          
+          print(numpy.random.randn(3, 3))
