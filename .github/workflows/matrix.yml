@@ -69,7 +69,14 @@ jobs:
       matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
       fail-fast: false
 
+    runs-on: ${{ matrix.os }}
+
     steps:
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Showcase Python shell
         shell: python
         run: |
