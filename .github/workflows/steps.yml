@@ -1,0 +1,50 @@
+on:
+  push:
+    branches:
+      - steps
+
+jobs:
+  generate-matrix:
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.generate.outputs.matrix }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - id: generate
+        run: |
+          MATRIX=$(python .github/generate_matrix.py)
+          echo $MATRIX | jq
+          echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
+
+  generate-steps:
+    runs-on: ubuntu-latest
+
+    outputs:
+      steps: ${{ steps.generate.outputs.steps }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - id: generate
+        run: |
+          STEPS=$(python .github/generate_steps.py)
+          echo STEPS | jq
+          echo "steps=${STEPS}" >> $GITHUB_OUTPUT
+
+  dynamic:
+    needs:
+      - generate-matrix
+      - generate-steps
+
+    strategy:
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps: ${{ fromJson(needs.generate-steps.outputs.steps) }}
