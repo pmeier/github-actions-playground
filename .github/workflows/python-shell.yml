@@ -34,6 +34,7 @@ jobs:
         run: python -m pip install numpy
 
       - name: Try numpy
+        shell: python
         run: |
           import numpy
           
