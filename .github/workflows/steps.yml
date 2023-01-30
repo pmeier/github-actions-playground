@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - steps
+      - dynamic-steps
 
 jobs:
   generate-matrix:
@@ -36,7 +36,7 @@ jobs:
           echo STEPS | jq
           echo "steps=${STEPS}" >> $GITHUB_OUTPUT
 
-  dynamic:
+  dynamic-steps:
     needs:
       - generate-matrix
       - generate-steps
