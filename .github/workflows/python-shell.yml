@@ -29,5 +29,6 @@ jobs:
           print(platform.platform())
           print(sys.executable)
           print(sys.version_info)
-          
-          import pip
+
+      - name: Try pip
+        run: python -m pip install requests
