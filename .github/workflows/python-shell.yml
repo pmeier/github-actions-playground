@@ -19,14 +19,15 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      name: Showcase Python shell
-      shell: python
-      run: |
-        import platform
-        import sys
-        
-        print(platform.platform())
-        print(sys.executable)
-        print(sys.version_info)
-        
-        import pip
+      - name: Showcase Python shell
+        # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
+        shell: python
+        run: |
+          import platform
+          import sys
+          
+          print(platform.platform())
+          print(sys.executable)
+          print(sys.version_info)
+          
+          import pip
