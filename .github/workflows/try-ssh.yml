@@ -25,6 +25,7 @@ jobs:
         uses: seemethere/add-github-ssh-key@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          activate-with-label: false
 
       - name: Do something here
         run: sleep 600
