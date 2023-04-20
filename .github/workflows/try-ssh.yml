@@ -3,6 +3,8 @@ on:
     branches:
       - master
 
+  pull_request:
+
 jobs:
   ci:
     strategy:
