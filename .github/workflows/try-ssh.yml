@@ -24,11 +24,15 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Do something here
+        run: sleep 600
+
       - name: Hold runner for 10 minutes or until ssh sessions have drained
         timeout-minutes: 10
+        shell: bash
         run: |
           echo "Holding runner until all ssh sessions have logged out"
           while [[ "$(who)" != "" ]]; do
-            echo "."
+            who
             sleep 5
           done
