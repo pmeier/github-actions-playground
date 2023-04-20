@@ -1,0 +1,34 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        os:
+          - windows-2022  # windows-latest
+          - windows-2019
+          - ubuntu-22.04  # ubuntu-latest
+          - ubuntu-20.04
+          - macos-12  # macos-latest
+          - macos-11
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Enable SSH (Click me for details)
+        uses: seemethere/add-github-ssh-key@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Hold runner for 10 minutes or until ssh sessions have drained
+        timeout-minutes: 10
+        run: |
+          echo "Holding runner until all ssh sessions have logged out"
+          while [[ "$(who)" != "" ]]; do
+            echo "."
+            sleep 5
+          done
