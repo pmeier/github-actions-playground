@@ -13,4 +13,6 @@ jobs:
       - name: Display
         env:
           FOO: ${{ toJSON(github) }}
+          TARGET: main
+          BAR: ${{ toJSON(github.ref_name) }}
         run: exit 0
