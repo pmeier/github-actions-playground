@@ -10,5 +10,5 @@ jobs:
     steps:
       - name: Display
         env:
-          FOO: ${{ github }}
+          FOO: ${{ toJSON(github) }}
         run: exit 0
